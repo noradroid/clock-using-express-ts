@@ -1,0 +1,86 @@
+html {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  background-color: pink;
+  font-family: "Inter", "Roboto", "Helvetica Neue", sans-serif;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  background-image: url("https://img.freepik.com/free-vector/beautiful-white-leaves-with-text-space_1017-30800.jpg?t=st=1692112711~exp=1692113311~hmac=2e9b31a95f85f6fec217eb4fac5967b5ffc2405d72943b3d7e7eb38bacb32992");
+  background-size: cover;
+}
+
+footer {
+  bottom: 0;
+  position: fixed;
+  padding: 10px;
+  font-size: 14px;
+}
+
+#container {
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+#clock {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  padding-top: 40px;
+  padding-bottom: 20px;
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+#date {
+  font-size: 44px;
+  display: flex;
+  justify-content: space-between;
+  color: #96bdd3;
+}
+
+#time {
+  color: #72A6C4;
+  font-size: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#t0,
+#t1,
+#t2,
+#t3,
+#t4,
+#t5,
+#t6,
+#t7 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.4s ease-in-out;
+  padding: 10px 0px;
+}
+
+/* numbers */
+#t0,
+#t1,
+#t3,
+#t4,
+#t6,
+#t7 {
+  width: 50px;
+  height: 100px;
+}
+
+/* colons */
+#t2,
+#t5 {
+  width: 30px;
+}
