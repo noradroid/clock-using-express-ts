@@ -4,11 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "prep": "npx tsc && cp ./src/index.html ./public && cp ./src/styles.css ./public",
+    "start": "npm run prep && npx nodemon ./index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "noradroid",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.1.6"
   }
 }

@@ -1,9 +1,9 @@
-const timeChars = ["0", "0", ":", "0", "0", ":", "0", "0"];
+const timeChars: string[] = ["0", "0", ":", "0", "0", ":", "0", "0"];
 
-const yearInString = (year) => {
-  return year;
+const yearInString = (year: number): string => {
+  return String(year);
 };
-const monthInString = (month) => {
+const monthInString = (month: number): string => {
   const months = [
     "January",
     "February",
@@ -20,24 +20,24 @@ const monthInString = (month) => {
   ];
   return months[month];
 };
-const dayInString = (day) => {
-  return day;
+const dayInString = (day: number): string => {
+  return String(day);
 };
-const hoursInString = (hours) => {
+const hoursInString = (hours: number): string => {
   if (hours < 10) {
     return "0" + String(hours);
   } else {
     return String(hours);
   }
 };
-const minutesInString = (minutes) => {
+const minutesInString = (minutes: number): string => {
   if (minutes < 10) {
     return "0" + String(minutes);
   } else {
     return String(minutes);
   }
 };
-const secondsInString = (seconds) => {
+const secondsInString = (seconds: number): string => {
   if (seconds < 10) {
     return "0" + String(seconds);
   } else {
@@ -45,9 +45,9 @@ const secondsInString = (seconds) => {
   }
 };
 
-const updateTime = () => {
+const updateTime = (): void => {
   const date = new Date();
-  const timeStr =
+  const timeStr: string =
     hoursInString(date.getHours()) +
     ":" +
     minutesInString(date.getMinutes()) +
