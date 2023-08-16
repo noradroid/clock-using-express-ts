@@ -1,5 +1,18 @@
 # Express clock in TypeScript
 
+- [Express basics](#express-basics)
+  - [Running an Express app](#running-an-express-app)
+  - [Starting the webserver with `.listen()`](#starting-the-webserver-with-listen)
+  - [Routing](#routing)
+  - [Wildcard routes](#wildcard-routes)
+  - [Redirection](#redirection)
+  - [Serving static files](#serving-static-files)
+- [Migrating to TypeScript](#migrating-to-typescript)
+  - [TypeScript config file](#typescript-config-file)
+  - [Transpilation command](#transpilation-command)
+- [What is `path.join(__dirname, '/public')`?](#what-is-pathjoin__dirname-public)
+- [Difficulties faced](#difficulties-faced)
+  - [Not able to display webpage properly on Brave browser, `time.js` file would not get loaded](#not-able-to-display-webpage-properly-on-brave-browser-timejs-file-would-not-get-loaded)
 
 
 ### Express basics
@@ -112,9 +125,64 @@ app.use('/static', express.static('public'));
 
 will serve the 'public/image.png' file to `/static/image.png`.
 
+Other than this, you might also need to use the `res.sendFile()` function to serve a specific html file to the browser.
+However, if you have a "index.html" file, express will automatically serve that file.
+
+
+### Migrating to TypeScript
+
+To migrate to typescript, you need to
+- have files written in `.ts` (of course)
+- have a folder to contain typescript files and a separate folder that will contain the transpilation of typescript into javascript
+  - the separate folder would be something like your output folder ("build" or "public")
+  - typescript files could be in a "src" folder
+- write a `tsconfig.json` config file
+
+#### TypeScript config file
+
+Basic `tsconfig.json` file:
+
+```json
+{
+  "compilerOptions": {
+    "outDir": "./public",
+    "allowJs": true,
+    "target": "es5",
+  },
+  "include": ["./src/**/*"]
+}
+```
+
+- `include` to include all typescript files that should be transpiled
+- `outDir` as the output directory of the transpiled files
+- `allowJs` to allow javascript files to be included in the transpilation / not throw arrow if they exist
+- `target` as in target version / backward compatibility that we are aiming for. E.g. `es5` means we want to convert the newer javascript code into the older ECMAScript 5 version so that it can be processed by older browsers
+
+#### Transpilation command
+
+```console
+tsc
+```
+
+Just `tsc` (or `npx tsc` if you do not have typescript installed) and it will transpile code based on the above config file.
+
 
 ### What is `path.join(__dirname, '/public')`?
 
 `__dirname` is an environment variable that tells the absolute path of the directory the currently executing file is in.
 
 `path.join()` is a method from the node standard library `path` (included by doing `const path = require('path');`) that combines two strings into a path string. Hence, we are joining the current directory name (e.g. 'C:/code/project') and the '/public' directory to create a path string (e.g. 'C:/code/project/public').
+
+### Difficulties faced
+
+#### Not able to display webpage properly on Brave browser, `time.js` file would not get loaded
+
+Works on other browsers (Edge, Firefox, Chrome) but does not work on Brave.
+
+Error 1:
+
+> Uncaught SyntaxError: Unexpected token '<' (at time.js:1:1)
+
+Error 2 (when using `type="module"` attribute): 
+
+> Failed to load module script: Expected a JavaScript module script but the server responded with a MIME type of "text/html". Strict MIME type checking is enforced for module scripts per HTML spec.
